@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .container {
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .container .input-group {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            padding: .7rem;
+            background-color: grey;
+            border-radius: .5rem;
+        }
+
+        .input-group input {
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .2rem;
+            border: transparent;
+        }
+
+        .input-group button {
+            font-size: 1rem;
+            padding: .5rem 1rem;
+            border-radius: .2rem;
+            border: transparent;
+            cursor: pointer;
+        }
+
+        .input-group button:hover {
+            background-color: rgb(98, 98, 98);
+            color: #fff;
+        }
+
+        .input-group .result {
+            font-size: 1rem;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Javascript <br> <span>Age Calculator</span></h1>
+        <div class="input-group">
+            <input type="date">
+            <button class="calculate">calculate</button>
+        </div>
+        <div class="result"></div>
+    </div>
+
+
+    <script>
+
+        const btnCalculate = document.querySelector('.calculate');
+        const input = document.querySelector('input');
+        const result = document.querySelector('.result');
+
+        btnCalculate.addEventListener('click', function () {
+            const sekarang = new Date();
+            const lahir = new Date(input.value);
+
+            let tahun = sekarang.getFullYear() - lahir.getFullYear();
+            let bulan = sekarang.getMonth() - lahir.getMonth();
+            let hari = sekarang.getDate() - lahir.getDate();
+
+            if (hari < 0) {
+                bulan--;
+                hari += new Date(sekarang.getFullYear(), sekarang.getMonth(), 0).getDate();
+            }
+
+            if (bulan < 0) {
+                tahun--;
+                bulan += 12;
+            }
+
+            result.innerHTML = `You are <span>${tahun}</span>  years, <span>${bulan}</span> month, and <span>${hari}</span> days old.`;
+        })
+
+    </script>
+</body>
+
+</html>
